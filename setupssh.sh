@@ -2,4 +2,4 @@
 
 eval "$(ssh-agent -s)"
 
-echo ssh-add "$1"
+ssh-add "$1"
