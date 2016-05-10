@@ -10,7 +10,7 @@ var serveIndex = require('serve-index')
 const spawn = require('child_process').spawn;
 const exec = require('child_process').exec;
 
-const siteGit = 'git@github.com:MuvucaGames/doxygen-server.git'
+const siteGit = 'git@github.com:MuvucaGames/muvucagames.github.io.git'
 var temp_dir = path.join(process.cwd(), 'temp/');
 
 
