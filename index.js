@@ -40,7 +40,7 @@ app.post('/postpush', function(req, res) {
             }
             console.log("Clone game sucessful");
 
-            exec('git clone', [siteGit] , (error, stdout, stderr) => {
+            exec('git clone '+ siteGit , (error, stdout, stderr) => {
                 console.log(`stdout: ${stdout}`);
                 console.log(`stderr: ${stderr}`);
                 if (error !== null) {
