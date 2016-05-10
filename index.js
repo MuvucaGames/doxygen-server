@@ -8,7 +8,7 @@ var app = express();
 var doxygen = require('./doxygen');
 var serveIndex = require('serve-index')
 const spawn = require('child_process').spawn;
-const spawn = require('child_process').exec;
+const exec = require('child_process').exec;
 
 var temp_dir = path.join(process.cwd(), 'temp/');
 
