@@ -17,7 +17,9 @@ module.exports = function(){
     fs.writeFileSync(privateSsh, process.env.privategithubssh);
     fs.writeFileSync(publicSsh, process.env.publicgithubssh);
 
-    var addSshKey = spawn('eval "$(ssh-agent -s)" && ssh-add '+privateSsh);
+    var addSshKey = spawn('sh', ['setupssh.sh', privateSsh]);
+
+    //var addSshKey = spawn('eval "$(ssh-agent -s)" && ssh-add '+privateSsh);
 
     addSshKey.stdout.on('data', (data) => {
       console.log(`stdout: ${data}`);
@@ -30,4 +32,5 @@ module.exports = function(){
     addSshKey.on('close', (code) => {
       console.log(`child process exited with code ${code}`);
     });
+
 }
