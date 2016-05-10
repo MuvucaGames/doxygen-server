@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const doxygenBinPath = path.join(process.cwd(), 'doxygen/bin/doxygen');
+var mkdirp = require('mkdirp');
 
 const spawn = require('child_process').spawn;
 
