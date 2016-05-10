@@ -13,7 +13,7 @@ const exec = require('child_process').exec;
 var temp_dir = path.join(process.cwd(), 'temp/');
 
 
-var createSsh = require('create-ssh');
+var createSsh = require('./create-ssh');
 createSsh();
 
 app.set('port', (process.env.PORT || 5000));
