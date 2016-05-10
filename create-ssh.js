@@ -17,7 +17,7 @@ module.exports = function(){
     fs.writeFileSync(privateSsh, process.env.privategithubssh);
     fs.writeFileSync(publicSsh, process.env.publicgithubssh);
 
-    const addSshKey = spawn('ssh-add '+privateSsh);
+    const addSshKey = spawn('eval "$(ssh-agent -s)" && ssh-add '+privateSsh);
 
     addSshKey.stdout.on('data', (data) => {
       console.log(`stdout: ${data}`);
