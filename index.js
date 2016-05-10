@@ -10,7 +10,9 @@ var serveIndex = require('serve-index')
 const spawn = require('child_process').spawn;
 const exec = require('child_process').exec;
 
+const siteGit = 'git@github.com:MuvucaGames/doxygen-server.git'
 var temp_dir = path.join(process.cwd(), 'temp/');
+
 
 
 var createSsh = require('./create-ssh');
@@ -36,10 +38,18 @@ app.post('/postpush', function(req, res) {
                 console.log(err);
                 return;
             }
-            console.log("Clone sucessful");
+            console.log("Clone game sucessful");
 
-            doxygen(function(){
-                console.log("DOCS created");
+            exec('git', ['clone', siteGit] , (error, stdout, stderr) => {
+                console.log(`stdout: ${stdout}`);
+                console.log(`stderr: ${stderr}`);
+                if (error !== null) {
+                    console.log(`exec error: ${error}`);
+                }else{
+                    doxygen(function(){
+                        console.log("DOCS created");
+                    });
+                }
             });
         })
     })
