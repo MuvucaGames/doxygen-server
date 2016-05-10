@@ -9,7 +9,7 @@ const privateSsh = path.join(process.cwd(), "/.ssh/githubssh");
 const publicSsh = path.join(process.cwd(), "/.ssh/githubssh.pub");
 
 module.exports = function(){
-    mkdirp.sync(getDirName(privateSsh));
+    mkdirp.sync(getDirName(publicSsh));
     if(!process.env.privategithubssh || !process.env.publicgithubssh){
         console.error("privategithubssh or publicgithubssh NOT defined in config vars");
         return;
@@ -29,7 +29,5 @@ module.exports = function(){
 
     addSshKey.on('close', (code) => {
       console.log(`child process exited with code ${code}`);
-      fs.unlinkSync(privateSsh);
-      fs.unlinkSync(publicSsh);
     });
 }
