@@ -5,21 +5,15 @@ var mkdirp = require('mkdirp');
 
 const spawn = require('child_process').spawn;
 const exec = require('child_process').exec;
+const execSync = require('child_process').execSync;
 
 module.exports = function(callback){
     console.log("..........doxing................");
     fs.chmodSync(doxygenBinPath, 0777);
 
-    const child = exec(doxygenBinPath,
-        (error, stdout, stderr) => {
-            console.log(`stdout: ${stdout}`);
-            console.log(`stderr: ${stderr}`);
-            if (error !== null) {
-                console.log(`exec error: ${error}`);
-            }
-            console.log("...........DOXY PROCESS EDNDED..........");
-            callback();
-        });
+    execSync(doxygenBinPath);
+    console.log("....Process ENDED");
+    callback();
     /*
     const doxy = spawn(doxygenBinPath);
 
