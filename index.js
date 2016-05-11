@@ -53,7 +53,7 @@ app.post('/postpush', function(req, res) {
                                     return console.error(err);
                                 }
                                 console.log(pretext, 'copied docs to site dir');
-
+                                uploadsite();
 
                             });
                         });
