@@ -83,39 +83,14 @@ app.listen(app.get('port'), function() {
 
 function uploadsite(){
     var repox = 'https://' + process.env.githubtoken + '@github.com/MuvucaGames/muvucagames.github.io.git';
-    execSync('sh setupgit.sh', [site_dir, repox, 'master']);
+    //execSync('sh setupgit.sh', [site_dir, repox, 'master']);
+    execSync('sh setupgit.sh');
+    console.log("publishing");
     ghpages.publish(site_dir, {
         branch: 'master',
-        repo: 'https://' + process.env.githubtoken + '@github.com/MuvucaGames/muvucagames.github.io.git',
+        repo: repox,
     }, function(e){
         console.log(pretext, "DONE", e);
     });
-}
 
-/*
-function uploadsite(){
-    const GithubPages = require('github-pages');
-    const parseConfig = require('github-pages').parseConfig;
-    const config = parseConfig({
-        repo: 'MuvucaGames/muvucagames.github.io',
-        token: process.env.githubtoken,
-        remoteRef: 'heads/master',
-        commitMessage: 'DOCS created by server',
-        commitAuthor: 'muvucasever <muvucasever@muvucaagames.com.br>',
-        apiVersion: '3.0.0',
-        apiProtocol: 'https',
-        apiHost: 'api.github.com',
-        apiPath: '',
-        apiTimeout: 5000
-    }, site_dir);
-
-    const pages = new GithubPages(config);
-    pages.publish().then((res)=> {
-        console.log(pretext,'published');
-        console.log(JSON.stringify(res, null, 2));
-    }).catch((err)=> {
-        console.error('error while publishing');
-        console.error(JSON.stringify(err, null, 2));
-    });
 }
-*/
