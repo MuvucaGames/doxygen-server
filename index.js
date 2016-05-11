@@ -30,8 +30,7 @@ app.post('/postpush', function(req, res) {
     console.log(pretext, "Recieved PUSH");
     console.log(pretext, "Deleting game folder");
     rimraf(game_dir, function(){
-        console.log(pretext, "Recreating game folder");
-        console.log(pretext, "Deleting game folder");
+        console.log(pretext, "Deleting site folder");
         rimraf(site_dir, function(){
             console.log(pretext, "Recreating folders");
             if (!fs.existsSync(game_dir))
@@ -60,7 +59,9 @@ app.post('/postpush', function(req, res) {
                                         if (err)
                                             return console.error(err);
                                         console.log(pretext, 'copied docs to site dir');
-                                        //uploadsite();
+                                        setTimeout(function(){
+                                            uploadsite();
+                                        }, 3000);
                                     });
                                 }, 3000);
                             });
