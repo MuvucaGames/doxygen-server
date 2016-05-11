@@ -11,7 +11,7 @@ const spawn = require('child_process').spawn;
 const exec = require('child_process').exec;
 
 const siteGit = 'git@github.com:MuvucaGames/muvucagames.github.io.git'
-var game_dir = path.join(process.cwd(), 'temp/');
+var game_dir = path.join(process.cwd(), 'MuvucaGame01/');
 var site_dir = path.join(process.cwd(), 'site/');
 
 app.set('port', (process.env.PORT || 5000));
