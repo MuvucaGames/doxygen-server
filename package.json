@@ -16,7 +16,9 @@
     "git-clone": "^0.1.0",
     "rimraf": "^2.5.2",
     "serve-index": "^1.7.3",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0 ",
+    "github-pages": "^3.0.2"
   },
   "repository": {
     "type": "git",
