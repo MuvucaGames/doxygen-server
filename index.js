@@ -9,7 +9,7 @@ var doxygen = require('./doxygen');
 var serveIndex = require('serve-index')
 const spawn = require('child_process').spawn;
 const exec = require('child_process').exec;
-const exeSync = require('child_process').execSync;
+const execSync = require('child_process').execSync;
 var ghpages = require('gh-pages');
 var ncp = require('ncp').ncp;
 ncp.limit = 16;
@@ -61,9 +61,9 @@ app.post('/postpush', function(req, res) {
                                         console.log(pretext, 'copied docs to site dir');
                                         setTimeout(function(){
                                             uploadsite();
-                                        }, 3000);
+                                        }, 2000);
                                     });
-                                }, 3000);
+                                }, 2000);
                             });
                         });
                     });
