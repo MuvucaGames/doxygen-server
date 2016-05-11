@@ -7,7 +7,7 @@ const spawn = require('child_process').spawn;
 
 
 module.exports = function(callback){
-    console.log("doxing");
+    console.log("..........doxing................");
     fs.chmodSync(doxygenBinPath, 0777);
     const doxy = spawn(doxygenBinPath);
 
@@ -21,6 +21,7 @@ module.exports = function(callback){
 
     doxy.on('close', (code) => {
       console.log(`child process exited with code ${code}`);
+      console.log("...............CALLING CALLBACK...............");
       callback();
     });
 }
