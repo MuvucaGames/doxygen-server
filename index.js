@@ -9,6 +9,7 @@ var doxygen = require('./doxygen');
 var serveIndex = require('serve-index')
 const spawn = require('child_process').spawn;
 const exec = require('child_process').exec;
+const exeSync = require('child_process').execSync;
 var ghpages = require('gh-pages');
 var ncp = require('ncp').ncp;
 ncp.limit = 16;
@@ -81,12 +82,16 @@ app.listen(app.get('port'), function() {
 
 
 function uploadsite(){
+    var repox = 'https://' + process.env.githubtoken + '@github.com/MuvucaGames/muvucagames.github.io.git';
+    execSync('sh setupgit.sh', [site_dir, repox, 'master']);
+    /*
     ghpages.publish(site_dir, {
         branch: 'master',
         repo: 'https://' + process.env.githubtoken + '@github.com/MuvucaGames/muvucagames.github.io.git',
     }, function(e){
         console.log(pretext, "DONE", e);
     });
+    */
 }
 
 /*
