@@ -92,11 +92,11 @@ function uploadsite(){
         apiHost: 'api.github.com',
         apiPath: '',
         apiTimeout: 5000
-    , site_dir);
+    }, site_dir);
 
     const pages = new GithubPages(config);
     pages.publish().then((res)=> {
-        console.log('published');
+        console.log(pretext,'published');
         console.log(JSON.stringify(res, null, 2));
     }).catch((err)=> {
         console.error('error while publishing');
