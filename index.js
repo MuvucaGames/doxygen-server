@@ -13,6 +13,7 @@ var ncp = require('ncp').ncp;
 ncp.limit = 16;
 
 var game_dir = path.join(process.cwd(), 'MuvucaGame01/');
+var docs_html_dir = path.join(process.cwd(), 'docs/html/');
 var site_dir = path.join(process.cwd(), 'site/');
 var site_docs_dir = path.join(site_dir, 'taleoftwohearts/docs/');
 const pretext= "--------";
@@ -41,16 +42,18 @@ app.post('/postpush', function(req, res) {
                 if(err){
                     return console.error(err);
                 }
-                doxygen(function(){
-                    console.log(pretext, "Doxy Created--------------------");
-                    rimraf(site_docs_dir, function(){
-                        if (!fs.existsSync(site_docs_dir))
-                            fs.mkdirSync(site_docs_dir);
-                        ncp(source, destination, function (err) {
-                            if (err) {
-                                return console.error(err);
-                            }
-                            console.log(pretext, 'copied docs to site dir');
+                rimraf(docs_html_dir, function(){
+                    doxygen(function(){
+                        console.log(pretext, "Doxy Created--------------------");
+                        rimraf(site_docs_dir, function(){
+                            if (!fs.existsSync(site_docs_dir))
+                                fs.mkdirSync(site_docs_dir);
+                            ncp(, destination, function (err) {
+                                if (err) {
+                                    return console.error(err);
+                                }
+                                console.log(pretext, 'copied docs to site dir');
+                            });
                         });
                     });
                 });
