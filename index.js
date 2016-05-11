@@ -45,7 +45,7 @@ app.post('/postpush', function(req, res) {
                 rimraf(docs_html_dir, function(){
                     doxygen(function(){
                         console.log(pretext, "Doxy Created--------------------");
-                        return;
+
                         rimraf(site_docs_dir, function(){
                             if (!fs.existsSync(site_docs_dir))
                                 fs.mkdirSync(site_docs_dir);
