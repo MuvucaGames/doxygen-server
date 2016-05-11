@@ -84,14 +84,12 @@ app.listen(app.get('port'), function() {
 function uploadsite(){
     var repox = 'https://' + process.env.githubtoken + '@github.com/MuvucaGames/muvucagames.github.io.git';
     execSync('sh setupgit.sh', [site_dir, repox, 'master']);
-    /*
     ghpages.publish(site_dir, {
         branch: 'master',
         repo: 'https://' + process.env.githubtoken + '@github.com/MuvucaGames/muvucagames.github.io.git',
     }, function(e){
         console.log(pretext, "DONE", e);
     });
-    */
 }
 
 /*
