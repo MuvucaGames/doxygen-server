@@ -53,6 +53,8 @@ app.post('/postpush', function(req, res) {
                                     return console.error(err);
                                 }
                                 console.log(pretext, 'copied docs to site dir');
+
+
                             });
                         });
                     });
@@ -74,3 +76,30 @@ app.use('/static', serveIndex(__dirname, {'icons': true}))
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+
+
+function uploadsite(){
+    const GithubPages = require('github-pages');
+    const parseConfig = require('github-pages').parseConfig;
+    const config = parseConfig({
+        repo: 'MuvucaGames/muvucagames.github.io',
+        token: process.env.githubtoken,
+        remoteRef: 'heads/master',
+        commitMessage: 'DOCS created by server',
+        commitAuthor: 'muvucasever <muvucasever@muvucaagames.com.br>',
+        apiVersion: '3.0.0',
+        apiProtocol: 'https',
+        apiHost: 'api.github.com',
+        apiPath: '',
+        apiTimeout: 5000
+    , site_dir);
+
+    const pages = new GithubPages(config);
+    pages.publish().then((res)=> {
+        console.log('published');
+        console.log(JSON.stringify(res, null, 2));
+    }).catch((err)=> {
+        console.error('error while publishing');
+        console.error(JSON.stringify(err, null, 2));
+    });
+}
