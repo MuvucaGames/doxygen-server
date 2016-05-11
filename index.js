@@ -28,40 +28,50 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.post('/postpush', function(req, res) {
     console.log(pretext, "Recieved PUSH");
-    console.log(pretext, "Deleting old folder");
+    console.log(pretext, "Deleting game folder");
     rimraf(game_dir, function(){
-        console.log(pretext, "Recreating folder");
-        if (!fs.existsSync(game_dir))
-            fs.mkdirSync(game_dir);
-        console.log(pretext, "Cloning repo");
-        clone("https://github.com/MuvucaGames/MuvucaGame01.git", game_dir, function(err){
-            if(err)
-                return console.error(err);
-            console.log(pretext, "Clone game sucessful");
-            clone("https://github.com/MuvucaGames/muvucagames.github.io.git", site_dir, function(err){
-                console.log(pretext, "Clone site sucessful");
+        console.log(pretext, "Recreating game folder");
+        console.log(pretext, "Deleting game folder");
+        rimraf(site_dir, function(){
+            console.log(pretext, "Recreating folders");
+            if (!fs.existsSync(game_dir))
+                fs.mkdirSync(game_dir);
+            if (!fs.existsSync(site_dir)){
+                fs.mkdirSync(site_dir);
+            }
+            console.log(pretext, "Cloning repos");
+            clone("https://github.com/MuvucaGames/MuvucaGame01.git", game_dir, function(err){
                 if(err)
                     return console.error(err);
-                rimraf(docs_html_dir, function(){
-                    doxygen(function(){
-                        console.log(pretext, "Doxy Created--------------------");
+                console.log(pretext, "Clone game sucessful");
+                clone("https://github.com/MuvucaGames/muvucagames.github.io.git", site_dir, function(err){
+                    console.log(pretext, "Clone site sucessful");
+                    if(err)
+                        return console.error(err);
+                    rimraf(docs_html_dir, function(){
+                        doxygen(function(){
+                            console.log(pretext, "Doxy Created--------------------");
 
-                        rimraf(site_docs_dir, function(){
-                            if (!fs.existsSync(site_docs_dir))
-                                fs.mkdirSync(site_docs_dir);
-                            setTimeout(function() {
-                                ncp(docs_html_dir, site_docs_dir, function (err) {
-                                    if (err)
-                                        return console.error(err);
-                                    console.log(pretext, 'copied docs to site dir');
-                                    uploadsite();
-                                });
-                            }, 3000);
+                            rimraf(site_docs_dir, function(){
+                                if (!fs.existsSync(site_docs_dir))
+                                    fs.mkdirSync(site_docs_dir);
+                                setTimeout(function() {
+                                    ncp(docs_html_dir, site_docs_dir, function (err) {
+                                        if (err)
+                                            return console.error(err);
+                                        console.log(pretext, 'copied docs to site dir');
+                                        //uploadsite();
+                                    });
+                                }, 3000);
+                            });
                         });
                     });
                 });
             });
-        });
+        }
+
+
+
     });
 
     res.send('ok');
@@ -80,10 +90,11 @@ app.listen(app.get('port'), function() {
 
 
 function uploadsite(){
+    console.log(pretext, "uploading sequence");
     var repox = 'https://' + process.env.githubtoken + '@github.com/MuvucaGames/muvucagames.github.io.git';
     //execSync('sh setupgit.sh', [site_dir, repox, 'master']);
     execSync('sh setupgit.sh');
-    console.log("publishing");
+    console.log(pretext, "publishing");
     ghpages.publish(site_dir, {
         branch: 'master',
         repo: repox,
