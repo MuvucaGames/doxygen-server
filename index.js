@@ -68,10 +68,7 @@ app.post('/postpush', function(req, res) {
                     });
                 });
             });
-        }
-
-
-
+        });
     });
 
     res.send('ok');
