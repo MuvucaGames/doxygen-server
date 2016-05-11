@@ -35,15 +35,13 @@ app.post('/postpush', function(req, res) {
             fs.mkdirSync(game_dir);
         console.log(pretext, "Cloning repo");
         clone("https://github.com/MuvucaGames/MuvucaGame01.git", game_dir, function(err){
-            if(err){
+            if(err)
                 return console.error(err);
-            }
             console.log(pretext, "Clone game sucessful");
             clone("https://github.com/MuvucaGames/muvucagames.github.io.git", site_dir, function(err){
                 console.log(pretext, "Clone site sucessful");
-                if(err){
+                if(err)
                     return console.error(err);
-                }
                 rimraf(docs_html_dir, function(){
                     doxygen(function(){
                         console.log(pretext, "Doxy Created--------------------");
@@ -51,14 +49,14 @@ app.post('/postpush', function(req, res) {
                         rimraf(site_docs_dir, function(){
                             if (!fs.existsSync(site_docs_dir))
                                 fs.mkdirSync(site_docs_dir);
-                            ncp(docs_html_dir, site_docs_dir, function (err) {
-                                if (err) {
-                                    return console.error(err);
-                                }
-                                console.log(pretext, 'copied docs to site dir');
-                                uploadsite();
-
-                            });
+                            setTimeout(function() {
+                                ncp(docs_html_dir, site_docs_dir, function (err) {
+                                    if (err)
+                                        return console.error(err);
+                                    console.log(pretext, 'copied docs to site dir');
+                                    uploadsite();
+                                });
+                            }, 3000);
                         });
                     });
                 });
