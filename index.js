@@ -48,7 +48,7 @@ app.post('/postpush', function(req, res) {
                         rimraf(site_docs_dir, function(){
                             if (!fs.existsSync(site_docs_dir))
                                 fs.mkdirSync(site_docs_dir);
-                            ncp(, destination, function (err) {
+                            ncp(docs_html_dir, site_docs_dir, function (err) {
                                 if (err) {
                                     return console.error(err);
                                 }
