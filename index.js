@@ -35,6 +35,7 @@ app.post('/postpush', function(req, res) {
             }
             console.log("Clone game sucessful");
             clone("https://github.com/MuvucaGames/muvucagames.github.io.git", site_dir, function(err){
+                console.log("Clone site sucessful");
                 if(err){
                     console.error(err);
                     return;
