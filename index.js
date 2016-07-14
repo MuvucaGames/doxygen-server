@@ -96,6 +96,7 @@ function uploadsite(){
     ghpages.publish(site_dir, {
         branch: 'master',
         repo: repox,
+        dotfiles: true
     }, function(e){
         console.log(pretext, "DONE", e);
     });
