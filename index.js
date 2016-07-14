@@ -109,6 +109,6 @@ function cleanDirs(cb){
             if(err) return console.error(err);
             else
                 cb();
-        }
-    }
+        });
+    });
 }
