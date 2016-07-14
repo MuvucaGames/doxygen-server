@@ -47,7 +47,7 @@ app.post('/postpush', function(req, res) {
                     console.log(pretext, "Clone site sucessful");
                     if(err)
                         return console.error(err);
-                    rimraf(docs_html_dir, function(){
+                    cleanDirs(function(){
                         doxygen(function(){
                             console.log(pretext, "Doxy Created--------------------");
 
@@ -101,4 +101,14 @@ function uploadsite(){
         console.log(pretext, "DONE", e);
     });
 
+}
+
+function cleanDirs(cb){
+    rimraf(path.join(site_dir, ".git"), function(err){
+        rimraf(docs_html_dir, function(err){
+            if(err) return console.error(err);
+            else
+                cb();
+        }
+    }
 }
